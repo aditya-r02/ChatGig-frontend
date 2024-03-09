@@ -40,13 +40,13 @@ export default function Home(){
                 {
                     token &&
                     <div className="w-full px-4 my-4 gap-4 flex flex-col">
-                        <NavLink to="/dashboard" className="flex gap-1 items-center cursor-pointer py-2  bg-blue-600
+                        <NavLink to="/dashboard" className="flex gap-1 items-center cursor-pointer py-2  bg-[#2196F3]
                         text-white rounded-md text-lg w-full justify-center">
                             Dashboard
                             <FaArrowRight/>
                         </NavLink>
 
-                        <div className="flex gap-1 items-center cursor-pointer py-2  bg-white
+                        <div className="flex gap-1 items-center cursor-pointer py-2  bg-gray-300
                         text-black rounded-md text-lg w-full justify-center"
                         onClick={logOut}>
                             LogOut
@@ -58,14 +58,14 @@ export default function Home(){
                 {
                     !token &&
                     <div className="w-full px-4 my-4 gap-4 flex flex-col">
-                        <NavLink to="/signup" className="flex gap-1 items-center cursor-pointer py-2  bg-blue-600
+                        <NavLink to="/signup" className="flex gap-1 items-center cursor-pointer py-2  bg-[#2196F3]
                         text-white rounded-md text-lg w-full justify-center">
                             Sign Up
                             <FaArrowRight/>
                         </NavLink>
 
-                        <NavLink to="/login" className="flex gap-1 items-center cursor-pointer py-2  bg-white
-                        text-black rounded-md text-lg w-full justify-center">
+                        <NavLink to="/login" className="flex gap-1 items-center cursor-pointer py-2  bg-[#2196F3]
+                        text-white rounded-md text-lg w-full justify-center">
                             Log In
                         </NavLink>
                     </div>

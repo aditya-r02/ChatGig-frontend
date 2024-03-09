@@ -11,7 +11,7 @@ function App() {
   
   
   return (
-    <div className='w-screen max-w-[100vw] min-h-screen flex flex-col items-center pb-2'>
+    <div className='w-screen max-w-[100vw] min-h-screen flex flex-col items-center pb-2 bg-[#303030]'>
       <Navbar/>
       
 
