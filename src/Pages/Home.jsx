@@ -23,7 +23,7 @@ export default function Home(){
 
 
     return (
-        <div className="w-full">
+        <div className="w-full min-h-full">
             <div className="flex flex-col w-full items-center">
                 {/*Image part*/}
                 <div className="w-full relative">
@@ -40,13 +40,13 @@ export default function Home(){
                 {
                     token &&
                     <div className="w-full px-4 my-4 gap-4 flex flex-col">
-                        <NavLink to="/dashboard" className="flex gap-1 items-center cursor-pointer py-2  bg-[#2196F3]
+                        <NavLink to="/dashboard" className="flex gap-1 items-center cursor-pointer py-2  bg-violet-400
                         text-white rounded-md text-lg w-full justify-center">
                             Dashboard
                             <FaArrowRight/>
                         </NavLink>
 
-                        <div className="flex gap-1 items-center cursor-pointer py-2  bg-gray-300
+                        <div className="flex gap-1 items-center cursor-pointer py-2  bg-slate-400
                         text-black rounded-md text-lg w-full justify-center"
                         onClick={logOut}>
                             LogOut
@@ -58,13 +58,13 @@ export default function Home(){
                 {
                     !token &&
                     <div className="w-full px-4 my-4 gap-4 flex flex-col">
-                        <NavLink to="/signup" className="flex gap-1 items-center cursor-pointer py-2  bg-[#2196F3]
+                        <NavLink to="/signup" className="flex gap-1 items-center cursor-pointer py-2  bg-violet-400
                         text-white rounded-md text-lg w-full justify-center">
                             Sign Up
                             <FaArrowRight/>
                         </NavLink>
 
-                        <NavLink to="/login" className="flex gap-1 items-center cursor-pointer py-2  bg-[#2196F3]
+                        <NavLink to="/login" className="flex gap-1 items-center cursor-pointer py-2  bg-slate-400
                         text-white rounded-md text-lg w-full justify-center">
                             Log In
                         </NavLink>

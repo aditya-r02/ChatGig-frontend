@@ -89,28 +89,31 @@ export default function SignupPage(){
     }
 
     return (
-        <div className="w-full max-w-full flex flex-col mx-3 min-h-fit">
-            <div className="w-full overflow-x-hidden">
+        <div className="w-full max-w-full flex flex-col mx-3 min-h-[60vh] pt-10">
+            {/* <div className="w-full overflow-x-hidden">
                 <img src={image} alt="man" className="w-full h-auto"/>
-            </div>
+            </div> */}
+            <h2 className="text-white text-center text-3xl font-semibold">
+                SignUp
+            </h2>
 
             {
                 !otpSection &&
-                <form className="w-full max-w-full mt-5 px-4 flex flex-col gap-3"
+                <form className="w-full max-w-full mt-5 px-4 flex flex-col gap-3 text-white text-lg"
             onSubmit={submitHandler}>
                 {/*First Name and Last Name*/}
                 <div className="flex gap-1">
                     <label >
                         <p>First Name<span className="text-red-500">*</span></p>
                         <input type="text" name="firstName" value={data.firstName}
-                        className=" border w-full rounded-sm text-lg"
+                        className=" w-full rounded-sm text-lg bg-slate-500/50 outline-none px-1"
                         onChange={changeHandler}
                         /> 
                     </label>
                     <label >
                         <p>Last Name<span className="text-red-500">*</span></p>
                         <input type="text" name="lastName" value={data.lastName}
-                        className=" border w-full rounded-sm text-lg"
+                        className=" w-full rounded-sm text-lg bg-slate-500/50 outline-none px-1"
                         onChange={changeHandler}
                         /> 
                     </label>
@@ -119,7 +122,7 @@ export default function SignupPage(){
                 <label className="">
                     <p>Email<span className="text-red-500">*</span></p>
                     <input type="email" name="email" value={data.email}
-                    className=" border w-full rounded-sm text-lg"
+                    className=" w-full rounded-sm text-lg bg-slate-500/50 outline-none px-1"
                     onChange={changeHandler}
                     /> 
                 </label>
@@ -127,7 +130,7 @@ export default function SignupPage(){
                 <label>
                     <p>Password<span className="text-red-500">*</span></p>
                     <input type="password" name="password" value={data.password}
-                        className=" border w-full text-lg rounded-sm"
+                        className=" w-full rounded-sm text-lg bg-slate-500/50 outline-none px-1"
                         onChange={changeHandler}
                     />
                 </label>
@@ -137,37 +140,37 @@ export default function SignupPage(){
                     <label className="">
                         <p>User Name<span className="text-red-500">*</span></p>
                         <input type="text" name="userName" value={data.userName}
-                        className=" border w-full rounded-sm text-lg"
+                        className=" w-full rounded-sm text-lg bg-slate-500/50 outline-none px-1"
                         onChange={changeHandler}
                         /> 
                     </label>
 
-                    <div className="cursor-pointer border border-gray-400 text-sm py-1 px-2"
+                    <div className="cursor-pointer border border-slate-500 text-sm py-1 px-2"
                     onClick={checkUserName}>
                         Check 
                     </div>
                 </div>
 
-                <button type="submit" className="px-3 py-2 bg-blue-500 rounded-md 
-                text-white font-semibold">
-                    Sign Up
+                <button type="submit" className="px-3 py-2 bg-violet-400 rounded-md 
+                text-white font-semibold mt-2">
+                    Get OTP
                 </button>
                 </form>
             }
 
             {
                 otpSection &&
-                <form  className="w-full max-w-full mt-5 px-4 flex flex-col gap-3"
+                <form  className="w-full max-w-full my-auto px-4 flex flex-col gap-3 text-white text-lg"
                 onSubmit={sendOtp}>
                     <label >
                         <p>Enter OTP<span className="text-red-500">*</span></p>
                         <input type="text" name="otp" value={data.otp}
-                        className=" border w-full rounded-sm text-lg"
+                        className="outline-none bg-slate-500/50 w-full rounded-sm text-lg"
                         onChange={changeHandler}
                         /> 
                     </label>
 
-                    <button type="submit" className="px-3 py-2 bg-blue-500 rounded-md 
+                    <button type="submit" className="px-3 py-2 bg-violet-400 rounded-md 
                     text-white font-semibold">
                         Sign Up
                     </button>

@@ -49,17 +49,20 @@ export default function LoginPage(){
     }
 
     return (
-        <div className="w-full max-w-full max-h-screen flex flex-col mx-3">
-            <div className="w-full overflow-x-hidden">
+        <div className="w-full max-w-full max-h-screen flex flex-col mx-3 mt-5">
+            {/* <div className="w-full overflow-x-hidden">
                 <img src={image} alt="man" className="w-full h-auto"/>
-            </div>
+            </div> */}
+            <h2 className="text-white text-center text-3xl font-semibold">
+                Login
+            </h2>
 
-            <form className="w-full max-w-full mt-5 px-4 flex flex-col gap-3"
+            <form className="w-full max-w-full mt-5 px-4 flex flex-col gap-3 text-white text-lg"
             onSubmit={submitHandler}>
                 <label className="">
                     <p>Email<span className="text-red-500">*</span></p>
                     <input type="email" name="email" value={data.email}
-                    className=" border w-full rounded-sm text-lg"
+                    className="outline-none bg-slate-500/50 w-full rounded-sm text-lg px-1"
                     onChange={changeHandler}
                     /> 
                 </label>
@@ -67,13 +70,13 @@ export default function LoginPage(){
                 <label>
                     <p>Password<span className="text-red-500">*</span></p>
                     <input type="password" name="password" value={data.password}
-                        className=" border w-full text-lg rounded-sm"
+                        className="outline-none bg-slate-500/50 w-full text-lg rounded-sm px-1"
                         onChange={changeHandler}
                     />
                 </label>
 
-                <button type="submit" className="px-3 py-2 bg-blue-500 rounded-md 
-                text-white font-semibold">
+                <button type="submit" className="px-3 py-2 bg-violet-400 rounded-md 
+                text-white font-semibold mt-2">
                     Login
                 </button>
             </form>

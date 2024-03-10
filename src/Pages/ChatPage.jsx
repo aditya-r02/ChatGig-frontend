@@ -62,7 +62,7 @@ export default function ChatPage(){
     }, [])
 
     return (
-        <div className="w-full px-2">
+        <div className="w-full px-2 relative">
             {
                 chat.length>0 &&
                 <div className="w-full flex flex-col gap-2">
@@ -80,7 +80,7 @@ export default function ChatPage(){
                 
             }
             
-            <form onSubmit={submitHandler} className="w-full flex gap-3 my-3">
+            <form onSubmit={submitHandler} className="flex gap-3 my-3 fixed bottom-5 left-0 px-2 right-0">
                 <input type="text" value={message} onChange={changeHandler} className="grow border"/>
                 <button type="submit">
                     Send
