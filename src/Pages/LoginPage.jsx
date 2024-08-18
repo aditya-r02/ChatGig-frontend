@@ -1,16 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import image from "../assets/images/login.png"
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../Slices/UserSlice";
-
+import { setLoading } from "../Slices/LoadingSlice";
 
 export default function LoginPage(){
     const [data, setData] = useState({email:"", password:""});
     //const url = "https://res.cloudinary.com/dqdy8u03v/image/upload/v1708178893/login_u3e3kc.png"
     const url = "https://chatgig-backend.onrender.com/api/v1/login"
+    const token = useSelector((state)=>state.userDetails.token)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const changeHandler = (e) =>{
@@ -23,6 +24,7 @@ export default function LoginPage(){
     const submitHandler = async(e) =>{
         e.preventDefault();
         let result;
+        dispatch(setLoading(true));
         try{
             result = await axios.post(url, {email:data.email, password:data.password});
 
@@ -32,6 +34,7 @@ export default function LoginPage(){
                 localStorage.setItem("token", token);
                 localStorage.setItem("userName", result.data.userName);
                 dispatch(setToken(token));
+                dispatch(setLoading(false));
                 toast.success(result.data.message);
                 // Navigate to dashboard
                 navigate("/dashboard");
@@ -45,11 +48,17 @@ export default function LoginPage(){
             console.log(error);
             return;
         }
-        
+        dispatch(setLoading(false));
     }
 
+    useEffect(()=>{
+        if (token){
+            navigate("/")
+        }
+    }, [])
+
     return (
-        <div className="w-full max-w-full max-h-screen flex flex-col mx-3 mt-5">
+        <div className="w-full max-w-full max-h-screen flex flex-col mx-3 mt-5 items-center">
             {/* <div className="w-full overflow-x-hidden">
                 <img src={image} alt="man" className="w-full h-auto"/>
             </div> */}
@@ -57,7 +66,7 @@ export default function LoginPage(){
                 Login
             </h2>
 
-            <form className="w-full max-w-full mt-5 px-4 flex flex-col gap-3 text-white text-lg"
+            <form className="w-full max-w-full mt-5 px-4 flex flex-col gap-3 text-white text-lg lg:max-w-[30rem]"
             onSubmit={submitHandler}>
                 <label className="">
                     <p>Email<span className="text-red-500">*</span></p>

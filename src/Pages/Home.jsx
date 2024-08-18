@@ -23,31 +23,31 @@ export default function Home(){
 
 
     return (
-        <div className="w-full min-h-full">
-            <div className="flex flex-col w-full items-center">
+        <div className="w-full min-h-full flex-1 lg:max-h-[100%]">
+            <div className="flex flex-col w-full items-center lg:flex-row">
                 {/*Image part*/}
-                <div className="w-full relative">
-                    <img src={logo} loading="lazy" className="w-full h-auto" alt="home"/>
+                <div className="w-full lg:w-fit lg:h-full relative">
+                    <img src={logo} className="h-full w-fit" alt="home"/>
                     <div className="absolute top-0 text-white bottom-0 flex flex-col justify-center
-                    items-center left-0 right-0">
-                        <p className="text-3xl font-bold">Meet new people,</p>
-                        <p className="text-3xl font-bold">chat with friends</p>
-                        <p className="text-base font-normal">Join the chat community today!</p>
+                     left-0 right-0 gap-1">
+                        <p className="text-3xl font-bold h-fit w-full text-center overflow-y-hidden">Meet new people,</p>
+                        <p className="text-3xl font-bold h-fit w-full text-center overflow-y-hidden">chat with friends</p>
+                        <p className="text-base font-normal h-fit w-full text-center overflow-y-hidden">Join the chat community today!</p>
                     </div>
                 </div>
 
                 {/*For logged in users*/}
                 {
                     token &&
-                    <div className="w-full px-4 my-4 gap-4 flex flex-col">
+                    <div className="w-full px-4 my-4 gap-4 flex flex-col items-center">
                         <NavLink to="/dashboard" className="flex gap-1 items-center cursor-pointer py-2  bg-violet-400
-                        text-white rounded-md text-lg w-full justify-center">
+                        text-white rounded-md text-lg w-full justify-center lg:max-w-72">
                             Dashboard
                             <FaArrowRight/>
                         </NavLink>
 
                         <div className="flex gap-1 items-center cursor-pointer py-2  bg-slate-400
-                        text-black rounded-md text-lg w-full justify-center"
+                        text-black rounded-md text-lg w-full justify-center lg:max-w-72"
                         onClick={logOut}>
                             LogOut
                         </div>
@@ -57,15 +57,15 @@ export default function Home(){
                 {/*for new users*/}
                 {
                     !token &&
-                    <div className="w-full px-4 my-4 gap-4 flex flex-col">
+                    <div className="w-full px-4 my-4 gap-4 flex flex-col items-center">
                         <NavLink to="/signup" className="flex gap-1 items-center cursor-pointer py-2  bg-violet-400
-                        text-white rounded-md text-lg w-full justify-center">
+                        text-white rounded-md text-lg w-full justify-center lg:max-w-72">
                             Sign Up
                             <FaArrowRight/>
                         </NavLink>
 
                         <NavLink to="/login" className="flex gap-1 items-center cursor-pointer py-2  bg-slate-400
-                        text-white rounded-md text-lg w-full justify-center">
+                        text-white rounded-md text-lg w-full justify-center lg:max-w-72">
                             Log In
                         </NavLink>
                     </div>

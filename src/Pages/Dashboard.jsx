@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaSearch } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -7,6 +7,7 @@ import { BsFillSendPlusFill } from "react-icons/bs";
 import { CiCirclePlus } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import { IoIosSend } from "react-icons/io";
+import { setLoading } from "../Slices/LoadingSlice";
 
 
 
@@ -25,7 +26,7 @@ export default function Dashboard() {
     const [friendsData, setFriendsData] = useState([]);
     const [requestData, setRequestData] = useState([]);
     const [section, setSection] = useState(true);
-
+    const dispatch = useDispatch();
 
 
 
@@ -61,6 +62,11 @@ export default function Dashboard() {
             //console.log(searchResult.userName);
             result = await axios.post(sendRequestUrl, { token, userName: searchResult.userName });
             //console.log(result);
+            if (result.data.success==="true"){
+                toast.success("Request sent!")
+            }else{
+                toast.error(result.data.message);
+            }
         }
         catch (error) {
             console.log(error);
@@ -97,7 +103,7 @@ export default function Dashboard() {
             if (result.data.success) {
                 setSearchResult(result.data.data);
                 setIsFriend(result.data.isFriend);
-                console.log(result.data.isFriend);
+                //console.log(result.data.isFriend);
             }
             else {
                 toast.error(result.data.message);
@@ -113,6 +119,8 @@ export default function Dashboard() {
         console.log(otherId);
         try {
             result = await axios.post(acceptRequestUrl, { token, otherId });
+            fetchRequests();
+            fetchFriends();
             //console.log(result);
         }
         catch (error) {
@@ -120,29 +128,37 @@ export default function Dashboard() {
         }
     }
 
-    useEffect(() => {
-        fetchFriends();
-        fetchRequests();
+    const fetchData = async() => {
+        dispatch(setLoading(true));
+        await fetchFriends();
+        await fetchRequests();
+        dispatch(setLoading(false));
+    }
 
+    useEffect(() => {
+        fetchData();
 
     }, [token])
 
     return (
         <div className="w-full px-2 pt-5 h-full">
             {/*Select bar*/}
-            <div className=" w-full grid grid-cols-2 relative pb-1 ">
-                <div className={`text-center text-xl py-1 
-                ${section ? 'text-white  border-b border-violet-400' : 'text-slate-400'}`}
+            <div className=" w-full grid grid-cols-2 relative mb-4 pb-2 ">
+                <div className={`text-center text-xl pt-1 cursor-pointer
+                ${section ? 'text-white' : 'text-slate-400'}`}
                     onClick={() => { setSection(true) }}>
                     Friends
                 </div>
 
-                <div className={`text-center text-xl py-1 
-                ${!section ? 'text-white border-b border-violet-400' : 'text-slate-400'}`}
+                <div className={`text-center text-xl pt-1 cursor-pointer
+                ${!section ? 'text-white' : 'text-slate-400'}`}
                     onClick={() => { setSection(false) }}>
                     Requests
                 </div>
-
+                
+                <div className={`absolute h-1 bg-violet-400 bottom-0 w-[50%] transition-all duration-300 rounded-md
+                ${section? 'translate-x-0': 'translate-x-full'}`}
+                ></div>
             </div>
 
             {/*Friends list*/}
@@ -160,7 +176,7 @@ export default function Dashboard() {
                                         " "+friend.lastName} className="w-8 h-8 rounded-full"/>
                                     </span>
                                     <span>
-                                        {friend.firstName + " " + friend.lastName}
+                                        {friend.firstName + " " + friend.lastName} ({friend.userName})
                                     </span>
                                 </NavLink>
                             )

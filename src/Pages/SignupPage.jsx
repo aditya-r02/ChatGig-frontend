@@ -1,18 +1,21 @@
 import image from "../assets/images/signup.png"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../Slices/LoadingSlice";
 
 export default function SignupPage(){
     const [data, setData] = useState({email:"", password:"", firstName:"", lastName:"", userName:"",
     otp:""});
     const url = "https://chatgig-backend.onrender.com/api/v1/getotp";
+    const token = useSelector(state=>state.userDetails.token);
     const userNameUrl = "https://chatgig-backend.onrender.com/api/v1/checkusername";
     const otpUrl = "https://chatgig-backend.onrender.com/api/v1/signup"
     const [checked, setChecked] = useState(false);
     const [otpSection, setOtpSection] = useState(false);
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const changeHandler = (e) =>{
@@ -21,13 +24,21 @@ export default function SignupPage(){
         
     }
 
+    useEffect(()=>{
+        if (token){
+            navigate("/")
+        }
+    }, [])
+
     const submitHandler = async(e) =>{
         e.preventDefault();
+        
         if (!checked) {
             toast.error("Enter a valid user name");
             return;
         }
         let result;
+        dispatch(setLoading(true));
         try{
             result = await axios.post(url, {email:data.email, password:data.password, firstName:data.firstName,
             lastName:data.lastName, userName:data.userName});
@@ -44,6 +55,7 @@ export default function SignupPage(){
             console.log(error);
             return;
         }
+        dispatch(setLoading(false));
         
     }
 
@@ -51,6 +63,7 @@ export default function SignupPage(){
         let result;
         if (data.userName==="") return;
         //console.log(data.userName)
+        dispatch(setLoading(true));
         try{
             result = await axios.post(userNameUrl, {userName:data.userName});
             //console.log(result)
@@ -67,16 +80,19 @@ export default function SignupPage(){
         catch(error){
             console.log(error);
         }
+        dispatch(setLoading(false));
     }
 
     const sendOtp = async (e) =>{
         e.preventDefault();
         let result;
+        dispatch(setLoading(true));
         try{
             result = await axios.post(otpUrl, {email:data.email, password:data.password, firstName:data.firstName,
                 lastName:data.lastName, userName:data.userName, otp:data.otp});
             //console.log(result);
             if (result.data.success){
+                dispatch(setLoading(false));
                 toast.success(result.data.message);
                 navigate("/login")
             }else{
@@ -86,10 +102,11 @@ export default function SignupPage(){
         catch(error){
             console.log(error);
         }
+        dispatch(setLoading(false));
     }
 
     return (
-        <div className="w-full max-w-full flex flex-col mx-3 min-h-[60vh] pt-10">
+        <div className="w-full max-w-full flex flex-col mx-3 min-h-[60vh] pt-10 items-center">
             {/* <div className="w-full overflow-x-hidden">
                 <img src={image} alt="man" className="w-full h-auto"/>
             </div> */}
@@ -99,10 +116,10 @@ export default function SignupPage(){
 
             {
                 !otpSection &&
-                <form className="w-full max-w-full mt-5 px-4 flex flex-col gap-3 text-white text-lg"
+                <form className="w-full max-w-full mt-5 px-4 flex flex-col gap-3 text-white text-lg lg:max-w-[30rem]"
             onSubmit={submitHandler}>
                 {/*First Name and Last Name*/}
-                <div className="flex gap-1">
+                <div className="grid grid-cols-2 gap-1 w-full">
                     <label >
                         <p>First Name<span className="text-red-500">*</span></p>
                         <input type="text" name="firstName" value={data.firstName}
@@ -160,7 +177,7 @@ export default function SignupPage(){
 
             {
                 otpSection &&
-                <form  className="w-full max-w-full my-auto px-4 flex flex-col gap-3 text-white text-lg"
+                <form  className="w-full max-w-full my-auto px-4 flex flex-col gap-3 text-white text-lg lg:max-w-[30rem]"
                 onSubmit={sendOtp}>
                     <label >
                         <p>Enter OTP<span className="text-red-500">*</span></p>
