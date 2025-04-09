@@ -18,11 +18,11 @@ export default function Dashboard() {
     const [userName, setUserName] = useState("");
     const [searchResult, setSearchResult] = useState(null);
     const [isFriend, setIsFriend] = useState(false);
-    const fetchFriendsUrl = "https://chatgig-backend.onrender.com/api/v1/friends";
-    const searchUserUrl = "https://chatgig-backend.onrender.com/api/v1/searchuser";
-    const fetchRequestUrl = "https://chatgig-backend.onrender.com/api/v1/fetchrequests";
-    const sendRequestUrl = "https://chatgig-backend.onrender.com/api/v1/sendrequest";
-    const acceptRequestUrl = "https://chatgig-backend.onrender.com/api/v1/acceptrequest";
+    const fetchFriendsUrl = "http://localhost:4000/api/v1/friends";
+    const searchUserUrl = "http://localhost:4000/api/v1/searchuser";
+    const fetchRequestUrl = "http://localhost:4000/api/v1/fetchrequests";
+    const sendRequestUrl = "http://localhost:4000/api/v1/sendrequest";
+    const acceptRequestUrl = "http://localhost:4000/api/v1/acceptrequest";
     const [friendsData, setFriendsData] = useState([]);
     const [requestData, setRequestData] = useState([]);
     const [section, setSection] = useState(true);

@@ -10,7 +10,7 @@ import { setLoading } from "../Slices/LoadingSlice";
 export default function LoginPage(){
     const [data, setData] = useState({email:"", password:""});
     //const url = "https://res.cloudinary.com/dqdy8u03v/image/upload/v1708178893/login_u3e3kc.png"
-    const url = "https://chatgig-backend.onrender.com/api/v1/login"
+    const url = "http://localhost:4000/api/v1/login"
     const token = useSelector((state)=>state.userDetails.token)
     const navigate = useNavigate();
     const dispatch = useDispatch();

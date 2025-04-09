@@ -11,9 +11,9 @@ export default function ChatPage(){
     const chatDiv = useRef(null);
     const userName = useParams().userName;
     const currentUserName = localStorage.getItem("userName");
-    const socket = io("https://chatgig-backend.onrender.com");
-    const fetchChatUrl = "https://chatgig-backend.onrender.com/api/v1/fetchchat";
-    const sendMessageUrl = "https://chatgig-backend.onrender.com/api/v1/sendmessage";
+    const socket = io("http://localhost:4000");
+    const fetchChatUrl = "http://localhost:4000/api/v1/fetchchat";
+    const sendMessageUrl = "http://localhost:4000/api/v1/sendmessage";
     const [message, setMessage] = useState("");
     const [chat, setChat] = useState([]);
     const dispatch = useDispatch();

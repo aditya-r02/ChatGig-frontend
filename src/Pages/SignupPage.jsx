@@ -9,10 +9,10 @@ import { setLoading } from "../Slices/LoadingSlice";
 export default function SignupPage(){
     const [data, setData] = useState({email:"", password:"", firstName:"", lastName:"", userName:"",
     otp:""});
-    const url = "https://chatgig-backend.onrender.com/api/v1/getotp";
+    const url = "http://localhost:4000/api/v1/getotp";
     const token = useSelector(state=>state.userDetails.token);
-    const userNameUrl = "https://chatgig-backend.onrender.com/api/v1/checkusername";
-    const otpUrl = "https://chatgig-backend.onrender.com/api/v1/signup"
+    const userNameUrl = "http://localhost:4000/api/v1/checkusername";
+    const otpUrl = "http://localhost:4000/api/v1/signup"
     const [checked, setChecked] = useState(false);
     const [otpSection, setOtpSection] = useState(false);
     const dispatch = useDispatch();
